@@ -1,0 +1,49 @@
+<div class="mb-3">
+  @if (label()) {
+    <label class="form-label" [for]="id()">
+      {{ label() }}
+
+      @if (required()) {
+        <span class="text-danger">*</span>
+      }
+    </label>
+  }
+
+  <div class="position-relative">
+    <input
+      [class]="className()"
+      [id]="id()"
+      [type]="inputType()"
+      [placeholder]="placeholder()"
+      [required]="required()"
+      [disabled]="disabled()"
+      [autofocus]="autofocus()"
+      [value]="model()"
+      [class.is-invalid]="hasError()"
+      [class.border-primary]="focused()"
+      (input)="onInput($event)"
+      (focus)="onFocus()"
+      (blur)="onBlur()"
+    />
+
+    @if (type() === 'password') {
+      <button
+        type="button"
+        class="btn btn-sm position-absolute top-50 end-0 translate-middle-y me-2"
+        (click)="togglePassword()"
+      >
+        @if (showPassword()) {
+          👁️
+        } @else {
+          🙈
+        }
+      </button>
+    }
+  </div>
+
+  @if (hasError()) {
+    <div class="invalid-feedback d-block">
+      {{ error() }}
+    </div>
+  }
+</div>

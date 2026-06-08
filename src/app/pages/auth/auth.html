@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-center align-items-center mt-5">
+  <form
+    (ngSubmit)="onSubmitLogin()"
+    #form="ngForm"
+    class="card shadow p-4"
+    style="width: 100%; max-width: 400px; border-radius: 16px"
+  >
+    <h3 class="text-center mb-4 fw-semibold">Giriş</h3>
+
+    <app-input-component
+      className="form-control form-control-lg"
+      label="Kullanıcı Adı"
+      required
+      name="username"
+      [model]="username()"
+      (modelChange)="onUsernameChange($event)"
+      [error]="errors()['username']"
+    />
+
+    <app-input-component
+      className="form-control form-control-lg"
+      type="password"
+      label="Şifre"
+      required
+      name="password"
+      [model]="password()"
+      (modelChange)="onPasswordChange($event)"
+      [error]="errors()['password']"
+    />
+
+    <div class="text-end">
+      <app-button-component
+        type="submit"
+        className="btn btn-primary"
+        text="Giriş Yap"
+        [disabled]="form.invalid || loading()"
+        [loading]="loading()"
+      />
+    </div>
+
+    <div
+      *ngIf="errorMessage()"
+      class="mt-2 text-center"
+      style="
+        color: rgb(93, 6, 6);
+        background-color: rgb(225, 10, 96);
+        border-radius: 8px;
+        padding: 10px;
+      "
+    >
+      <b>{{ errorMessage() }}</b>
+    </div>
+  </form>
+</div>

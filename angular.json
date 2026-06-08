@@ -29,9 +29,7 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/styles.scss"
-            ]
+            "styles": ["node_modules/material-icons/iconfont/material-icons.css", "src/styles.scss"]
           },
           "configurations": {
             "production": {
@@ -73,6 +71,14 @@
           "builder": "@angular/build:unit-test"
         }
       }
+    }
+  },
+  "schematics": {
+    "@schematics/angular:component": {
+      "skipTests": true
+    },
+    "@schematics/angular:service": {
+      "skipTests": true
     }
   }
 }

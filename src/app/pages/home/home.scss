@@ -1,0 +1,54 @@
+h3 {
+  text-align: center;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+
+.grid-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 140px);
+  gap: 10px;
+  margin-bottom: 1.5rem;
+}
+
+.grid button {
+  padding: 10px;
+  font-size: 13px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+
+  &:hover {
+    background: #e8e8e8;
+  }
+}
+
+.controls {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+
+  button {
+    padding: 8px 18px;
+    border: 1px solid #aaa;
+    border-radius: 8px;
+    background: #fff;
+    cursor: pointer;
+    font-size: 14px;
+  }
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48,
+  'color' #818
+}

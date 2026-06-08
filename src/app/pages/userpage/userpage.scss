@@ -1,0 +1,11 @@
+.permissions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.permission-item label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}

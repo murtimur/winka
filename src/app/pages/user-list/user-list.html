@@ -1,0 +1,40 @@
+<h2 class="text-start">Kullanıcılar</h2>
+
+<div class="table-wrapper">
+  <table class="modern-table">
+    <thead>
+      <tr>
+        <th>Adı</th>
+        <th>Durum</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (user of users(); track user.id) {
+        <tr style="cursor: pointer;" (click)="onClickSelectUser(user)">
+          <td>{{ user.username }}</td>
+          <td>
+            <span [ngClass]="user.status ? 'badge active' : 'badge passive'">
+              {{ user.status ? 'Online' : 'Offline' }}
+            </span>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
+
+@if (loading()) {
+    <app-bigspinner></app-bigspinner>
+}
+
+<div class="d-flex justify-content-center align-items-center gap-5 mt-3">
+  <app-button-component className="btn btn-secondary"
+          (click)="prevPage()"
+          [disabled]="currentPage() === 0" text="Geri"/>
+  <span>
+    Sayfa {{ currentPage() + 1 }} / {{ totalPages() }}
+  </span>
+  <app-button-component className="btn btn-secondary"
+          (click)="nextPage()"
+          [disabled]="currentPage() + 1 >= totalPages()" text="İleri" />
+</div>

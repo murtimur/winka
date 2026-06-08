@@ -1,0 +1,100 @@
+<div>
+  <h3>Kullanıcı Oluştur</h3>
+
+  <div>
+    <app-input-component
+      label="Kullanıcı Adı"
+      [model]="user().username"
+      (modelChange)="onFieldChange('username', $event)"
+      [error]="errors()['username']"
+    />
+
+    <app-input-component
+      label="Şifre"
+      type="password"
+      [model]="user().password"
+      (modelChange)="onFieldChange('password', $event)"
+      [error]="errors()['password']"
+    />
+
+    <app-input-component
+      label="Şifre Tekrarı"
+      type="password"
+      [model]="passwordRepeat()"
+      (modelChange)="passwordRepeat.set($event)"
+      [error]="passwordRepeatError()"
+    />
+
+    <div>
+      <div class="mb-3">
+        <label class="form-label">Rol</label>
+        <select
+          class="form-select"
+          [value]="user().roles[0]?.name"
+          (change)="changeRole($any($event.target).value)"
+        >
+          @for (role of userRoleData(); track role.id) {
+            <option [value]="role.value">{{ role.name }}</option>
+          }
+        </select>
+      </div>
+
+      <hr style="color: rgb(55, 193, 177)" />
+      <h3>Ayarlar</h3>
+
+      <div class="row">
+        @for (setting of settings; track setting.key) {
+          <div class="col-md-6 mb-3">
+            <label class="form-label">{{ setting.label }}</label>
+            @if (setting.type === 'select') {
+              <select class="form-select" [(ngModel)]="user().settings[setting.key]">
+                @if (setting.key === 'yaziciAdi') {
+                  <option value="">Seçim Yapınız...</option>
+                }
+                @for (item of getOptions(setting.key); track item.id) {
+                  <option [value]="setting.key === 'yaziciAdi' ? item.adi : item.id">
+                    {{ item.adi }}
+                  </option>
+                }
+              </select>
+            }
+            @if (setting.type === 'number') {
+              <input
+                type="number"
+                class="form-control"
+                [(ngModel)]="user().settings[setting.key]"
+              />
+            }
+            @if (setting.type === 'string') {
+              <input type="text" class="form-control" [(ngModel)]="user().settings[setting.key]" />
+            }
+          </div>
+        }
+      </div>
+      <hr style="color: rgb(220, 77, 77)" />
+    </div>
+
+    <h3>Yetkiler</h3>
+    <div class="permissions-grid">
+      @for (permission of permissions; track permission) {
+        <div class="permission-item">
+          <label class="form-check-label">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              [checked]="user().permissions.includes(permission)"
+              (change)="togglePermission(permission, $any($event.target).checked)"
+            />
+            {{ permission.replaceAll('_', ' ') }}
+          </label>
+        </div>
+      }
+    </div>
+
+    <hr style="color: rgb(210, 109, 236)" />
+
+    <div class="text-end">
+      <app-button-component (clickEvent)="signup()" [loading]="loading()" type="submit" text="Kaydet" [disabled]="!!passwordRepeatError()" />
+    </div>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<nav style="color: rgb(4, 11, 67);font-size: 20px;" class="navbar bg-body-tertiary">
+  <div class="container-fluid">
+    <b style="color: rgb(4, 11, 67);font-size: 30px;" class="navbar-brand">Winka</b>
+    @if (authUser()?.username) {
+      <b class="d-flex">
+      <b class="mx-3" >{{ authUser()?.username }}</b>
+      <b style="cursor: pointer;" (click)="logout()" >Çıkış Yap</b>
+    </b>
+    }
+  </div>
+</nav>

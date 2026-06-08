@@ -1,0 +1,7 @@
+<button (click)="onClickHandler()"
+      [class]="className()"
+      [type]="type()"
+      [disabled]="disabled()"
+    >
+      @if(loading()){ <app-spinner-component></app-spinner-component> } {{text()}}
+</button>

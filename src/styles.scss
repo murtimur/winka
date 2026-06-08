@@ -1,1 +1,214 @@
-/* You can add global styles to this file, and also import other style files */
+
+@use '@angular/material' as mat;
+
+html {
+  height: 100%;
+  @include mat.theme(
+    (
+      color: (
+        primary: mat.$azure-palette,
+        tertiary: mat.$blue-palette,
+      ),
+      typography: Roboto,
+      density: 0,
+    )
+  );
+}
+
+body {
+  color-scheme: light;
+
+  background-color: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+  font: var(--mat-sys-body-medium);
+
+  margin: 0;
+  height: 100%;
+}
+
+h3 {
+  color: rgb(3, 2, 29) !important;
+}
+
+h2 {
+  color: rgb(3, 2, 29) !important;
+}
+
+h1 {
+  color: rgb(3, 2, 29) !important;
+}
+
+h4 {
+  color: rgb(3, 2, 29) !important;
+}
+
+h5 {
+  color: rgb(3, 2, 29) !important;
+}
+
+h6 {
+  color: rgb(3, 2, 29) !important;
+}
+
+$primary: #0ca5e9;
+$success: #21c55e;
+$info: rgb(207, 23, 112);
+$warning: #f97318;
+$secondary: #9236ed;
+$danger: #ef4444;
+$dark: #041225;
+$light: #7c98ec;
+$border-width: 2px;
+
+@import 'ngx-toastr/toastr';
+
+.toast-container.toast-bottom-center {
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+@import 'bootstrap/scss/bootstrap.scss';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+
+.card {
+  border: 1px solid rgb(231, 231, 231);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 1px 5px rgb(231, 231, 231);
+}
+
+.btn {
+  box-shadow: 3px 3px #e3e3e4;
+  transform: translate(-3px, -3px);
+  transition: unset;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  color: white;
+  &:active {
+    box-shadow: 1px 1px #e3e3e4;
+    transform: translate(-1px, -1px);
+  }
+  &:disabled {
+    box-shadow: unset;
+    transform: unset;
+  }
+}
+
+.navbar a {
+  &:hover {
+    text-shadow: 1px 1px rgb(236, 240, 242);
+    transform: translate(-2px, -2px);
+  }
+}
+
+.navbar {
+  border-bottom: 1px solid rgb(236, 240, 242);
+}
+
+.nav-item span {
+  cursor: pointer;
+  &:hover {
+    text-shadow: 2px 2px black;
+    transform: translate(-2px, -2px);
+  }
+}
+
+.no-outline {
+  resize: none;
+  &:focus {
+    outline: none;
+  }
+}
+
+.editor-base {
+  height: calc(100vh - 75px);
+}
+
+.editor-error {
+  border: 0;
+  border-bottom: 1px solid var(--bs-danger);
+}
+
+p.markdown img {
+  width: 100vw;
+  max-width: 100%;
+}
+
+.toast-wrapper {
+  max-width: 200px;
+  right: 20px;
+  top: 75px;
+  z-index: 1;
+  transition: opacity 0.3s ease;
+}
+
+.navbar .dropdown-item {
+  &:hover {
+    transform: unset;
+    text-shadow: unset;
+  }
+}
+.material-symbols-outlined.action {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  &:hover {
+    text-shadow: 2px 2px var(--bs-secondary);
+    transform: translate(-2px, -2px);
+  }
+}
+
+.loadingSpinnerContainer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: white;
+  z-index: 5000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loadingSpinner {
+  width: 64px;
+  height: 64px;
+  border: 15px solid;
+  border-color: #dd2471 transparent #dd2471 transparent;
+  border-radius: 50%;
+  animation: spin 1.7s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 600px) {
+  .form {
+    width: 90%;
+  }
+
+  .heading h1 {
+    font-size: 2rem;
+  }
+
+  .heading p {
+    font-size: 1.5rem;
+  }
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}

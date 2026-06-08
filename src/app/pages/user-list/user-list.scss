@@ -1,0 +1,93 @@
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  padding: 10px;
+}
+
+.modern-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  font-family: Arial, sans-serif;
+}
+
+.modern-table thead {
+  background: #111827;
+  color: #fff;
+}
+
+.modern-table th,
+.modern-table td {
+  padding: 14px 16px;
+  text-align: left;
+  font-size: 20px;
+}
+
+.modern-table tbody tr {
+  border-bottom: 1px solid #eee;
+  transition: 0.2s;
+}
+
+.modern-table tbody tr:hover {
+  background: #f9fafb;
+}
+
+/* Badge */
+.badge {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 16px;
+}
+
+.active {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.passive {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* 📱 Responsive (mobile card görünümü) */
+@media (max-width: 768px) {
+  .modern-table thead {
+    display: none;
+  }
+
+  .modern-table,
+  .modern-table tbody,
+  .modern-table tr,
+  .modern-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .modern-table tr {
+    margin-bottom: 12px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    padding: 10px;
+  }
+
+  .modern-table td {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .modern-table td:last-child {
+    border-bottom: none;
+  }
+
+  .modern-table td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    color: #6b7280;
+  }
+}

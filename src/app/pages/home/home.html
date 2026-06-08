@@ -1,0 +1,15 @@
+<div class="grid-wrapper mt-5">
+  <div class="grid">
+    <button (click)="openUrl(buton.url)"
+      class="btn"
+      style="background-color: rgb(91, 174, 219); font-size: 14px"
+      *ngFor="let buton of butonlar"
+    >
+      <i style="font-size: 40px; color: rgb(10, 87, 138)" [class]="buton.icon"></i>
+      <p></p>
+      <span class="button-text">{{ buton.text }}</span>
+    </button>
+  </div>
+</div>
+
+<div class="controls">© 2026 - v1.0.1</div>

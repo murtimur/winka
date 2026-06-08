@@ -1,0 +1,184 @@
+<div class="page">
+
+  <header class="header">
+
+    <div class="header-inner">
+
+      <div class="logo">
+        <span class="logo-icon">⬡</span>
+        <span class="logo-text">Barkod<strong>Yazdır</strong></span>
+      </div>
+
+      <div class="header-meta">
+        <span class="badge">{{ lockedRows }} satır eklendi</span>
+        <span class="date">{{ today }}</span>
+      </div>
+
+    </div>
+
+  </header>
+
+  <main class="main">
+
+    <div class="table-card">
+
+      <div class="table-toolbar">
+
+        <h2 class="table-title">Barkod</h2>
+
+        @if (lockedRows > 0) {
+          <button class="btn-clear" (click)="clearAll()">Temizle</button>
+        }
+      </div>
+
+      <div class="table-wrapper">
+
+        <table class="stock-table">
+          <thead>
+            <tr>
+              <th class="col-num">#</th>
+              <th class="col-code">Stok Kodu</th>
+              <th class="col-name">Ürün Adı</th>
+              <th class="col-unit">Birim</th>
+              <th class="col-stock">Mevcut Stok</th>
+              <th class="col-price">Birim Fiyat</th>
+              <th class="col-qty">Miktar</th>
+              <th class="col-total">Toplam</th>
+              <th class="col-action"></th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (row of rows; track row.id; let i = $index) {
+              <tr
+                class="table-row"
+                [class.row-locked]="row.locked"
+                [class.row-active]="!row.locked"
+                [class.row-error]="row.error && !row.loading"
+              >
+                <td class="col-num">
+                  <span class="row-num">{{ i + 1 }}</span>
+                </td>
+
+                <td class="col-code">
+                  @if (!row.locked) {
+                    <div class="input-cell">
+                      <input
+                        #codeInput
+                        class="code-input"
+                        [(ngModel)]="row.inputValue"
+                        (keydown.enter)="onCodeEnter(row, i)"
+                        (input)="onInput(row)"
+                        placeholder="Kod girin..."
+                        [disabled]="row.loading"
+                        autocomplete="off"
+                        spellcheck="false"
+                      />
+                      @if (row.loading) {
+                        <div class="input-loader"><span></span><span></span><span></span></div>
+                      }
+                    </div>
+                  } @else {
+                    <span class="locked-code">{{ row.stock?.code }}</span>
+                  }
+                </td>
+
+                <td class="col-name">
+                  @if (row.stock) {
+                    <span>{{ row.stock.name }}</span>
+                  } @else if (row.error && !row.loading) {
+                    <span class="error-text">{{ row.error }}</span>
+                  } @else if (!row.stock && !row.error && row.locked) {
+                    <span class="placeholder-text">—</span>
+                  }
+                </td>
+
+                <td class="col-unit">
+                  @if (row.stock) {
+                    <span class="unit-badge">{{ row.stock.unit }}</span>
+                  }
+                </td>
+
+                <td class="col-stock">
+                  @if (row.stock) {
+                    <span
+                      class="stock-value"
+                      [class.stock-zero]="row.stock.stock === 0"
+                      [class.stock-low]="row.stock.stock > 0 && row.stock.stock <= 10"
+                      [class.stock-ok]="row.stock.stock > 10"
+                    >
+                      {{ row.stock.stock | number }}
+                    </span>
+                  }
+                </td>
+
+                <td class="col-price">
+                  @if (row.stock) {
+                    <span class="price-value">{{ row.stock.price | number: '1.2-2' }} ₺</span>
+                  }
+                </td>
+
+                <td class="col-qty">
+                  @if (row.stock && !row.locked) {
+                    <input
+                      #qtyInput
+                      class="qty-input"
+                      type="number"
+                      [(ngModel)]="row.quantity"
+                      min="1"
+                      (keydown.enter)="lockRow(row, i)"
+                    />
+                  }
+                  @if (row.locked && row.stock) {
+                    <span class="qty-locked">{{ row.quantity }}</span>
+                  }
+                </td>
+
+                <td class="col-total">
+                  @if (row.stock) {
+                    <span class="total-value"
+                      >{{ row.stock.price * row.quantity | number: '1.2-2' }} ₺</span
+                    >
+                  }
+                </td>
+
+                <td class="col-action">
+                  @if (row.stock && !row.locked) {
+                    <button
+                      class="btn-confirm"
+                      (click)="lockRow(row, i)"
+                      title="Onayla ve devam et"
+                    >
+                      ✓
+                    </button>
+                  }
+                  @if (row.locked) {
+                    <button class="btn-delete" (click)="deleteRow(i)" title="Satırı sil">✕</button>
+                  }
+                </td>
+              </tr>
+            }
+          </tbody>
+
+          @if (lockedRows > 0) {
+            <tfoot>
+              <tr class="footer-row">
+                <td colspan="7" class="footer-label">GENEL TOPLAM</td>
+                <td class="footer-total">{{ grandTotal | number: '1.2-2' }} ₺</td>
+                <td></td>
+              </tr>
+            </tfoot>
+          }
+        </table>
+        
+      </div>
+
+      <div class="hint-bar">
+        <span
+          >💡 <strong>Enter</strong> ile stok sorgula &nbsp;·&nbsp; Miktar gir,
+          <strong>✓</strong> ile onayla &nbsp;·&nbsp; Winka</span
+        >
+      </div>
+
+    </div>
+  </main>
+</div>
