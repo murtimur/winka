@@ -1,1 +1,19 @@
-<p>renkler-modal works!</p>
+<div>
+  <button class="btn btn-secondary" (click)="openModal(myModal)">Renk Ekle</button>
+
+  <ng-template #myModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Renk Ekle</h4>
+      <button type="button" class="btn-close" (click)="modal.dismiss()"></button>
+    </div>
+    <div class="modal-body">
+      <form (ngSubmit)="ekle()">
+        <app-input-component />
+        <button type="submit" hidden>Ekle</button>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-success" (click)="modal.close()">Kapat</button>
+    </div>
+  </ng-template>
+</div>

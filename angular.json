@@ -29,7 +29,14 @@
                 "input": "public"
               }
             ],
-            "styles": ["node_modules/material-icons/iconfont/material-icons.css", "src/styles.scss"]
+            "styles": [
+              "node_modules/material-icons/iconfont/material-icons.css",
+              "src/styles.scss"
+            ],
+            "scripts": [
+              "node_modules/@popperjs/core/dist/umd/popper.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ]
           },
           "configurations": {
             "production": {
