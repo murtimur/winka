@@ -52,8 +52,9 @@ export class Signup {
 
   readonly userRoleData = signal([
     { id: 2, name: 'Kullanıcı', value: 'ROLE_USER' },
-    { id: 1, name: 'Yönetici', value: 'ROLE_ADMIN' },
-    { id: 3, name: 'Operatör', value: 'ROLE_MANAGER' },
+    { id: 1, name: 'Admin', value: 'ROLE_ADMIN' },
+    { id: 3, name: 'Yönetici', value: 'ROLE_MANAGER' },
+    { id: 3, name: 'Operatör', value: 'ROLE_OPERATOR' },
   ]);
 
   readonly user = signal<User>({
