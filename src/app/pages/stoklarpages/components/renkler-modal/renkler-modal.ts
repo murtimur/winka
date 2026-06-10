@@ -16,15 +16,18 @@ import { ToastService } from '../../../../services/toast.service';
   styleUrl: './renkler-modal.scss',
 })
 export class RenklerModal {
-  constructor(private modalService: NgbModal, private renklerService: RenklerService, private toastrService: ToastService) {}
+  constructor(
+    private modalService: NgbModal,
+    private renklerService: RenklerService,
+    private toastrService: ToastService,
+  ) {}
 
   readonly errors = signal<ErrorMap>({});
 
   renk = signal<Renkler>({
     adi: '',
     kodu: '',
-    id: 0,
-    renk: { r: 0, g: 0, b: 0 },
+    renk: 0,
   });
 
   openModal(content: any) {
@@ -39,6 +42,19 @@ export class RenklerModal {
     this.clearError(key as string);
   }
 
+  intToHex(value: number): string {
+    if (!value) return '#000000';
+    return '#' + value.toString(16).padStart(6, '0').toUpperCase();
+  }
+
+  onColorChange(value: any) {
+    if (value) {
+      const cleanHex = (value as string).replace('#', '');
+      const intValue = parseInt(cleanHex, 16);
+      this.renk.update((r) => ({ ...r, renk: intValue }));
+    }
+  }
+
   clearError(field: string) {
     if (!this.errors()[field]) return;
     this.errors.update((e) => {
@@ -51,12 +67,12 @@ export class RenklerModal {
   ekle() {
     try {
       this.renklerService.renkEkle(this.renk()).subscribe({
-        next: ()=> this.toastrService.success('Renk eklendi.'),
-        error: (err) => console.log(err)
+        next: () => this.toastrService.success('Renk eklendi.'),
+        error: (err) => console.log(err),
       });
     } catch (error) {
       console.log(error);
-      this.toastrService.error('Renk eklenemedi!')
+      this.toastrService.error('Renk eklenemedi!');
     }
   }
 }
