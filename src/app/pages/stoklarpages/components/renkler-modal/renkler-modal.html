@@ -7,19 +7,28 @@
     </div>
     <div class="modal-body">
       <form (ngSubmit)="ekle()">
-        <app-input-component [model]="kodu()" [error]="errors()['kodu']" label="Kodu" />
-        <app-input-component label="Adı" />
+        <app-input-component
+          (modelChange)="onFieldChange('kodu', $event)"
+          [model]="renk().kodu"
+          [error]="errors()['kodu']"
+          label="Kodu"
+        />
+        <app-input-component
+          [model]="renk().adi"
+          (modelChange)="onFieldChange('adi', $event)"
+          label="Adı"
+        />
         <div class="flex-1 flex flex-col items-center">
           <p-colorpicker
             name="color"
-            [(ngModel)]="color"
+            [(ngModel)]="renk().renk"
             format="rgb"
             inputId="cp-rgb"
             class="mb-4"
           />
-          <span>{{ ' - r:' + color.r + ' g:' + color.g + ' b:' + color.b }}</span>
+          <span>{{ ' - r:' + renk().renk.r + ' g:' + renk().renk.g + ' b:' + renk().renk.b }}</span>
         </div>
-        <button type="submit" hidden>Ekle</button>
+        <button type="submit" class="btn btn-secondary mt-2">Ekle</button>
       </form>
     </div>
     <div class="modal-footer">
